@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<!--  <constant name="struts.enable.DynamicMethodInvocation" value="false" /> -->
+
+	<!-- 开发模式 -->
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.i18n.reload" value="true"></constant>
+	<!-- 修改配置文件后服务器自动加载 -->
+	<constant name="struts.configuration.xml.reload" value="true"></constant>
+	<package name="base-package" extends="struts-default">
+	
+	<!-- <interceptors>
+	<interceptor name="Illegal" class="com.bjpowernode.egov.interceptor.IllegalVisitInterceptor"></interceptor>
+	<interceptor-stack name="MyStack">
+	<interceptor-ref name="Illegal"></interceptor-ref>
+	<interceptor-ref name="basicStack"></interceptor-ref>
+	</interceptor-stack>
+
+	</interceptors> -->
+	
+<!-- 	<default-interceptor-ref name="MyStack"></default-interceptor-ref> -->
+	
+	<global-results>
+	<result name="login" type="redirect">/login.jsp</result>
+	<result name="error">/error.html</result>
+	</global-results>
+	<!-- 登陆配置 -->
+	</package>
+	<package name="p_c" namespace="/user" extends="base-package">
+	<action name="login" class="com.spmms.action.LoginAction" method="login">
+	<result type="redirect" name="success">/index.html</result>
+	</action>
+	<action name="logout" class="com.spmms.action.LoginAction" method="logout">
+	</action>
+	
+	</package>
+<!-- 购物配置 -->
+	<package name="buyCargo" namespace="/buyCargo" extends="base-package">
+	<action name="index" class="com.spmms.action.BuyCargoAction" method="index">
+	<result type="dispatcher" name="success">/WEB-INF/jsp/buyCargo/index.jsp</result>
+	</action>
+	<action name="add" class="com.spmms.action.BuyCargoAction" method="add">
+	<result name="success" type="dispatcher"> /WEB-INF/jsp/buyCargo/add.jsp</result>
+	</action>
+	
+	<action name="save" class="com.spmms.action.BuyCargoAction" method="save">
+	
+	</action>
+	
+	<action name="getByPage" class="com.spmms.action.BuyCargoAction" method="getByPage">
+	</action>
+	</package>
+
+<!-- 存储配置 -->
+<package name="repository" namespace="/repository" extends="base-package">
+	<action name="index" class="com.spmms.action.RepositoryAction" method="index">
+	<result type="dispatcher" name="success">/WEB-INF/jsp/repository/index.jsp</result>
+	</action>
+	<action name="add" class="com.spmms.action.RepositoryAction" method="add">
+	<result name="success" type="dispatcher"> /WEB-INF/jsp/repository/add.jsp</result>
+	</action>
+
+	<action name="getByPage" class="com.spmms.action.BuyCargoAction" method="getByPage">
+	</action>
+	</package>
+
+<!-- 销售配置 -->
+	<package name="sellCargo" namespace="/sellCargo" extends="base-package">
+	<action name="index" class="com.spmms.action.SellCargoAction" method="index">
+	<result type="dispatcher" name="success">/WEB-INF/jsp/sellCargo/index.jsp</result>
+	</action>
+	<action name="add" class="com.spmms.action.SellCargoAction" method="add" >
+	<result name="success" type="dispatcher"> /WEB-INF/jsp/sellCargo/add.jsp</result>
+	</action>
+	
+	<action name="save" class="com.spmms.action.SellCargoAction" method="save">
+	
+	</action>
+	
+	<action name="getByPage" class="com.spmms.action.SellCargoAction" method="getByPage">
+	</action>
+	</package>
+</struts>

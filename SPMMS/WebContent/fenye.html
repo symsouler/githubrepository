@@ -1,0 +1,77 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<html>
+<head>
+
+
+<script type="text/javascript">
+	function firstPage() {
+		document.getElementById("hidden").value = 1;
+	}
+	function endPage() {
+		var num = document.getElementById("hidden").value = ${param.pagecount};
+		alert(num + 1);
+	}
+	function nextPage() {
+		var hidden = document.getElementById("hidden");
+		hidden.value = parseInt(hidden.value) + 1;
+	}
+	function upPage() {
+
+		var hidden = document.getElementById("hidden");
+		hidden.value = parseInt(hidden.value) - 1;
+	}
+	function selectPage() {
+
+		var selectValue = document.getElementById("select").value;
+
+		document.getElementById("hidden").value = selectValue;
+
+		document.forms[0].submit();
+	}
+</script>
+
+</head>
+<body>
+
+
+	<form action="/myWeb/select">
+		<table>
+
+			<tr>
+				<td><input type="submit" value="首页" onclick="firstPage()"
+					${param.pagenum ==1? "disabled=true" : ""} /></td>
+				<td><input type="submit" value="上一页" onclick="upPage()"
+					${param.pagenum==1?"disabled=true":"" }  /></td>
+				<td>${param.pagenum}/${param.pagecount}</td>
+				<td><input type="submit" value="下一页" onclick="nextPage()"
+					${param.pagenum==param.pagecount?"disabled='true'":""} /></td>
+				<td><input type="submit" value="尾页" onclick="endPage()"
+					${param.pagenum==param.pagecount?"disabled='true'":""}/></td>
+				<td><select id="select" onchange="selectPage()">
+				  <c:forEach  var="i" begin="1" end="${param.pagecount}" step="1">
+				  <option value="${i }">第${i }页</option>
+				  
+				  </c:forEach>
+				
+				
+				</select> <script type="text/javascript">
+					var currentPage = ${param.pagenum};
+					
+					var select = document.getElementById("select").options;
+					for ( var i = 0; i < select.length; i++) {
+						if (select[i].value == currentPage) {
+							select[i].selected =true;
+						}
+
+					}
+				</script>
+				</td>
+			</tr>
+			<input type="hidden" id="hidden" name="pagenum"
+				value="${param.pagenum}" />
+		</table>
+	</form>
+</body>
+</html>
