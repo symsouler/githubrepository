@@ -13,7 +13,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * @author 日期工具 by sukeqiang
+ * @author 日期工具 
  * 
  */
 public class DateUtils {
